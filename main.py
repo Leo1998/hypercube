@@ -41,7 +41,7 @@ def main():
     gluPerspective(45, (display[0]/display[1]), 0.5, 40)
     glTranslatef(0.0,0.0,-17.5)
 
-    cube = Tesseract()
+    cube = Tesseract(np.array([3, 3, 3, 1]))
 
     angle = 0
     accum = Quaternion(1, 0, 0, 0)
@@ -91,8 +91,8 @@ def main():
 
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
 
-        angle += pi/120
-        cube.transform = rotateAroundPlane(2, 3, angle)
+        angle += pi/100
+        cube.transform = rotateAroundPlane(2, 3, angle) # 2,3 mean rotate around ZW plane
 
         drawObject(cube)
 

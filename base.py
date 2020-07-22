@@ -33,10 +33,10 @@ class HyperObject:
 def generateUnitTesseract():
   verts = []
   for i in range(0, 2**4):
-    x = (i >> 0 & 1) * 2.0 - 1.0
-    y = (i >> 1 & 1) * 2.0 - 1.0
-    z = (i >> 2 & 1) * 2.0 - 1.0
-    w = (i >> 3 & 1) * 2.0 - 1.0
+    x = (i >> 0 & 1) - 0.5
+    y = (i >> 1 & 1) - 0.5
+    z = (i >> 2 & 1) - 0.5
+    w = (i >> 3 & 1) - 0.5
     verts.append(np.array([x, y, z, w]))
   return verts
 
@@ -45,14 +45,16 @@ def generateTesseractEdges(verts):
   edges = []
   for i0 in range(len(verts)):
     for i1 in range(len(verts)):
-      if i0 != i1 and np.linalg.norm(verts[i0] - verts[i1]) == 2.0:
+      if i0 != i1 and np.linalg.norm(verts[i0] - verts[i1]) == 1.0:
         edges.append((i0, i1))
   return edges
 
 class Tesseract(HyperObject):
-  def __init__(self):
+  def __init__(self, scale=np.array([1,1,1,1])):
     verts = generateUnitTesseract()
     edges = generateTesseractEdges(verts)
+    for vert in verts:
+      vert *= scale
     super(Tesseract, self).__init__(verts, edges)
 
 
