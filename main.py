@@ -31,6 +31,7 @@ def main():
     pygame.init()
     display = (1280,720)
     pygame.display.set_mode(display, DOUBLEBUF|OPENGL)
+    pygame.display.set_caption("Hypercube")
 
     # Using depth test to make sure closer colors are shown over further ones
     glEnable(GL_DEPTH_TEST)
